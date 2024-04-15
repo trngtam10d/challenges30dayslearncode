@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "compression": "^1.7.4",
+    "dotenv": "^16.4.5",
     "helmet": "^7.1.0",
     "mongoose": "^8.3.1",
     "morgan": "^1.10.0"

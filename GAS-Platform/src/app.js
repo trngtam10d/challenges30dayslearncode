@@ -1,3 +1,4 @@
+require('dotenv').config();
 const compression = require('compression');
 const express = require('express');
 const { default: helmet } = require('helmet');
@@ -16,14 +17,7 @@ const { checkOverload } = require('./helpers/check.connect');
 checkOverload();
 
 // init routes
-app.get('/', (req, res, next) => {
-    const strCompression = '11';
-
-    return res.status(200).json({
-        message: 'Welcome JS',
-        data: strCompression.repeat(100000)
-    })
-});
+app.use('', require('./routes'));
 
 // handling error
 

@@ -1,11 +1,12 @@
 'use strict'
 
 const mongoose = require('mongoose');
+const { db: { host, name, port } } = require('../configs/conf.mongodb');
 
-const connectString = 'mongodb://localhost:27017/shopStore';
+const connectString = `mongodb://${host}:${port}/${name}`;
 const { countConnect } = require('../helpers/check.connect');
 
-// Singleton Pattern
+// Chuaw a Pattern
 class Database {
     constructor() {
         this.connect();

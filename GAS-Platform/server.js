@@ -1,7 +1,7 @@
 //The task of declaring the port and starting the server.
 const app = require("./src/app");
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const server = app.listen(PORT, () => {
     console.log('Hello Word');
