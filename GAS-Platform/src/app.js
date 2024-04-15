@@ -11,14 +11,17 @@ app.use(helmet()); // Security cookie Similar to CSRF
 app.use(compression()); //Reduce data load and bandwidth ex): 700kb -> 100kb
 
 // init db
+require('./dbs/init.mongodb');
+const { checkOverload } = require('./helpers/check.connect');
+checkOverload();
 
 // init routes
 app.get('/', (req, res, next) => {
-    const strCompression = 'llll4';
+    const strCompression = '11';
 
     return res.status(200).json({
         message: 'Welcome JS',
-        data: strCompression.repeat(10000)
+        data: strCompression.repeat(100000)
     })
 });
 
