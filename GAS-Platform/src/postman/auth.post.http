@@ -1,11 +1,12 @@
 @url_local=http://localhost:4000/v1/api/
 
-### SignUp
+### signup
 POST {{url_local}}shop/signup
 Content-Type: application/json
+x-api-key: 2e17aeeac821a6f69cde4d43c006d959cb5e083f5beeeaf87f9334c859d7b0af907537e3044ebb2e4861d59a24292d7a1a92cf16957b491a042744214046c1ee
 
 {
     "name": "Shop TIPS",
-    "email": "shopdev09@gmail.com",
+    "email": "shopdev02@gmail.com",
     "password": "abc123"
 }

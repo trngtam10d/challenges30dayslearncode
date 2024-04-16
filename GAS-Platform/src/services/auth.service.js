@@ -7,6 +7,7 @@ const shopModel = require("../models/shop.model");
 const StoreService = require('./store.service');
 const { createTokenPair } = require('../auth/authUtils');
 const { getInfoData } = require('../utils');
+
 const RoleShop = {
     SHOP: 'SHOP',
     WRITE: 'WRITE',
@@ -58,7 +59,7 @@ class AuthService {
                     publicKey,
                     privateKey
                 });
-    
+
                 if (!keyStore) {
                     return {
                         code: 'xxx',
