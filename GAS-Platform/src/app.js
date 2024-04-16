@@ -10,11 +10,15 @@ const app = express();
 app.use(morgan('dev')); //morgan used: combined, common, short, tiny
 app.use(helmet()); // Security cookie Similar to CSRF
 app.use(compression()); //Reduce data load and bandwidth ex): 700kb -> 100kb
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}));
 
 // init db
 require('./dbs/init.mongodb');
-const { checkOverload } = require('./helpers/check.connect');
-checkOverload();
+// const { checkOverload } = require('./helpers/check.connect');
+// checkOverload();
 
 // init routes
 app.use('', require('./routes'));
