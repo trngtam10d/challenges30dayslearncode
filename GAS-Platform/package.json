@@ -5,20 +5,22 @@
   "main": "server.js",
   "scripts": {
     "start": "node --watch server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "http-status-codes": "^2.3.0"
   },
   "devDependencies": {
     "bcrypt": "^5.1.1",
     "compression": "^1.7.4",
     "dotenv": "^16.4.5",
     "helmet": "^7.1.0",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "*",
     "lodash": "^4.17.21",
     "mongoose": "^8.3.1",
     "morgan": "^1.10.0"
