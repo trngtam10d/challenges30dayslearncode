@@ -8,7 +8,7 @@ const COLLECTION_NAME = 'Keys';
 // Declare the Schema of the Mongo model
 var keySchema = new mongoose.Schema({
     key:{
-        type:String,
+        type: String,
         required:true,
         unique:true,
     },

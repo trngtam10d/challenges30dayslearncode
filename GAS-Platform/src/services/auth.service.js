@@ -7,7 +7,8 @@ const shopModel = require("../models/shop.model");
 const StoreService = require("./store.service");
 const { createTokenPair } = require("../auth/authUtils");
 const { getInfoData } = require("../utils");
-const { BadRequestError } = require("../core/error.response");
+const { BadRequestError, AuthFailureRequestError } = require("../core/error.response");
+const { findByEmail } = require("./shop.service");
 
 const RoleShop = {
     SHOP: "SHOP",
@@ -17,6 +18,37 @@ const RoleShop = {
 };
 
 class AuthService {
+    static login = async ({ email, password, refreshToken = null }) => {
+        const foundShop = await findByEmail({ email });
+        if (!foundShop) throw new BadRequestError('Shop not registered!');
+
+        const match = bcrypt.compare(password, foundShop.password);
+        if (!match) throw new AuthFailureRequestError('Authentication error');
+
+        const publicKey = crypto.randomBytes(64).toString("hex");
+        const privateKey = crypto.randomBytes(64).toString("hex");
+
+        const tokens = await createTokenPair(
+            { userId: foundShop._id, email },
+            publicKey,
+            privateKey
+        );
+
+        await StoreService.createPublicKey({
+            userId: foundShop._id,
+            refreshToken: tokens.refreshToken,
+            privateKey, publicKey
+        });
+
+        return {
+            shop: getInfoData({
+                fields: ["_id", "name", "email"],
+                object: foundShop,
+            }),
+            tokens,
+        };
+    };
+
     static signUp = async ({ name, email, password }) => {
         // step1: check email exits??
         const holderShop = await shopModel.findOne({ email }).lean();
@@ -51,7 +83,6 @@ class AuthService {
 
             const publicKey = crypto.randomBytes(64).toString("hex");
             const privateKey = crypto.randomBytes(64).toString("hex");
-
             // save model StoreKey.
             const keyStore = await StoreService.createPublicKey({
                 userId: newShop._id,
