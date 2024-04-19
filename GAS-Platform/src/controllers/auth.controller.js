@@ -4,11 +4,7 @@ const AuthService = require("../services/auth.service");
 
 class AuthController {
     signup = async (req, res, next) => {
-        try {
-            return res.status(201).json(await AuthService.signUp(req.body))
-        } catch (error) {
-            next(error);
-        }
+        return res.status(201).json(await AuthService.signUp(req.body))
     };
 }
 
